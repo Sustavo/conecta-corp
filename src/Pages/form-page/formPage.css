@@ -1,0 +1,4 @@
+.styled-button {
+  @apply w-full py-3 px-2 text-xl bg-[#623cd0] text-[#FFF] rounded font-medium
+;
+}
