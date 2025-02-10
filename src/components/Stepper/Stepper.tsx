@@ -14,9 +14,8 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
     <>
       <div className="flex flex-col justify-between gap-1">
         {steps?.map(({ subTitle, title }, i) => (
-          <div className="">
+          <div className="" key={i}>
             <div
-              key={i}
               className={`step-item 
               ${currentStep === i + 1 && "active"} 
               ${(i + 1 < currentStep) && "complete"} 
