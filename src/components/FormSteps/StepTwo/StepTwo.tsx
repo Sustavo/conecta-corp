@@ -1,8 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import '../step.css'
-import InputField from '../../InputField';
 import { StepTwoFormData } from '../../../lib/zod/wizard-form-datas';
 import { useEffect, useState } from 'react';
+import InputField from '../../InputField';
 
 export function StepTwo() {
     const {

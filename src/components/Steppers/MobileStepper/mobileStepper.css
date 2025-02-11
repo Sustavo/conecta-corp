@@ -1,0 +1,42 @@
+.step-item {
+    @apply flex gap-4
+  }
+  
+  .step {
+    @apply w-8 h-8 flex items-center justify-center bg-[#d4cdf4] rounded-full font-semibold text-white;
+  }
+  
+  .titleText {
+    @apply uppercase mb-2 text-[16px] font-normal text-[#957fe2];
+  }
+  
+  .subTitleText {
+    @apply text-[16px] font-normal text-[#B3A5EB];
+  }
+  
+  .active .step {
+    @apply bg-[#40258d];
+  }
+  
+  .active .titleText {
+    @apply text-[#201f2d];
+  }
+  
+  .active .subTitleText {
+    @apply text-[#605F6E];
+  }
+  
+  .complete .step,
+  .complete .line {
+    @apply bg-[#1aa5a4];
+  }
+  
+  .complete .titleText {
+    @apply text-[#201f2d];
+  }
+  
+  .complete .subTitleText {
+    @apply text-[#605F6E];
+  }
+  
+  

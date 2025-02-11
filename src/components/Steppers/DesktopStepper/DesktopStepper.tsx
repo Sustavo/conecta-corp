@@ -1,4 +1,4 @@
-import "./stepper.css";
+import "./desktopStepper.css";
 import { TiTick } from "react-icons/ti";
 
 interface StepperProps {
@@ -9,7 +9,7 @@ interface StepperProps {
   currentStep: number;
 }
 
-const Stepper = ({ steps, currentStep }: StepperProps) => {
+export default function DesktopStepper({ steps, currentStep }: StepperProps) {
   return (
     <>
       <div className="flex flex-col justify-between gap-1 mb-32">
@@ -40,5 +40,3 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
     </>
   );
 };
-
-export default Stepper;
