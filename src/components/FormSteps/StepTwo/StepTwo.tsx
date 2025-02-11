@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import '../step.css'
 import InputField from '../../InputField';
-import { StepTwoFormData } from '../../../@types/StepsTypes/StepFormData';
+import { StepTwoFormData } from '../../../lib/zod/wizard-form-datas';
 
 export function StepTwo() {
     const {
@@ -35,6 +35,7 @@ export function StepTwo() {
                 placeholder='Digite o país'
                 register={register}
                 error={typeof errors.residentialAddress?.country?.message === "string" ? errors.residentialAddress?.country.message : undefined}
+                isRequired={true}
             />
 
             <InputField
@@ -43,6 +44,7 @@ export function StepTwo() {
                 placeholder='Digite o estado'
                 register={register}
                 error={typeof errors.residentialAddress?.state?.message === "string" ? errors.residentialAddress.state.message : undefined}
+                isRequired={true}
             />
 
             <InputField
@@ -51,6 +53,7 @@ export function StepTwo() {
                 placeholder='Digite a cidade'
                 register={register}
                 error={typeof errors.residentialAddress?.city?.message === "string" ? errors.residentialAddress.city.message : undefined}
+                isRequired={true}
             />
 
             <InputField
@@ -59,6 +62,7 @@ export function StepTwo() {
                 placeholder='Digite a rua'
                 register={register}
                 error={typeof errors.residentialAddress?.street?.message === "string" ? errors.residentialAddress.street.message : undefined}
+                isRequired={true}
             />
 
             <InputField
@@ -67,6 +71,7 @@ export function StepTwo() {
                 placeholder='Digite a CEP'
                 register={register}
                 error={typeof errors.residentialAddress?.zip?.message === "string" ? errors.residentialAddress.zip.message : undefined}
+                isRequired={true}
             />
 
             <div className="container-inputs">

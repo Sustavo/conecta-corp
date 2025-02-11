@@ -7,6 +7,7 @@ interface InputFieldProps<T extends FieldValues> {
   type?: string;
   placeholder?: string;
   error?: string;
+  isRequired?: boolean;
   register: UseFormRegister<T>;
 }
 
@@ -16,13 +17,14 @@ export default function InputField<T extends FieldValues>({
   type = "text",
   placeholder,
   error,
+  isRequired = false,
   register, // Receba o register como prop
 }: InputFieldProps<T>) {
 
   return (
     <div className="container-inputs">
       <label htmlFor={String(id)} className="labelText">
-        {label}
+        {label}{isRequired ? <span className="text-red-600" > *</span> : <span className="text-gray-400"> (opcional)</span>}
       </label>
       <input
         id={String(id)}

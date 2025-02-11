@@ -30,14 +30,18 @@ export const stepThreeSchema = z.object({
 
 export const stepFourSchema = z.object({
     interests: z.object({
-        products: z.array(z.string()),
-        source: z.array(z.string()),
+        products: z.array(z.string()).min(1, "Pelo menos um produto deve ser selecionado"),
+        source: z.array(z.string()).min(1, "Pelo menos uma fonte deve ser selecionada"), 
     }),
 });
-
 export const formSchema = z.object({
     ...stepOneSchema.shape,
     ...stepTwoSchema.shape,
     ...stepThreeSchema.shape,
     ...stepFourSchema.shape,
 });
+
+export type StepOneFormData = z.infer<typeof stepOneSchema>;
+export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
+export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
+export type StepFourFormData = z.infer<typeof stepFourSchema>;

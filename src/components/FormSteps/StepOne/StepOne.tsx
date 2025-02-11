@@ -1,11 +1,12 @@
 import { useFormContext } from "react-hook-form";
 import InputField from "../../InputField";
+import { StepOneFormData } from "../../../lib/zod/wizard-form-datas";
 
 export function StepOne() {
     const {
         register,
         formState: { errors },
-    } = useFormContext();
+    } = useFormContext<StepOneFormData>();
     
     return (
         <div className="step-content">
@@ -15,7 +16,7 @@ export function StepOne() {
                 placeholder="Digite seu nome completo"
                 register={register}
                 error={typeof errors.fullName?.message === "string" ? errors.fullName.message : undefined}
-
+                isRequired={true}
             />
 
             <InputField
@@ -24,7 +25,7 @@ export function StepOne() {
                 type="date"
                 register={register}
                 error={typeof errors.birthDate?.message === "string" ? errors.birthDate.message : undefined}
-
+                isRequired={true}
             />
 
             <InputField
@@ -34,6 +35,7 @@ export function StepOne() {
                 placeholder="Digite seu e-mail"
                 register={register}
                 error={typeof errors.email?.message === "string" ? errors.email.message : undefined}
+                isRequired={true}
             />
 
             <InputField
@@ -42,6 +44,7 @@ export function StepOne() {
                 placeholder="11 98765-4321"
                 register={register}
                 error={typeof errors.phone?.message === "string" ? errors.phone.message : undefined}
+                isRequired={true}
             />
         </div>
     );

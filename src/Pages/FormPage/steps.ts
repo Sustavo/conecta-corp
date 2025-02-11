@@ -28,5 +28,5 @@ export const VALIDATION_STEPS = [
     "residentialAddress.zip",
   ],
   [],
-  [],
+  ["interests.products", "interests.source"],
 ];

@@ -4,7 +4,7 @@ import { FormProvider, useFormContext } from "react-hook-form";
 import { StepOne } from "../../components/FormSteps/StepOne/StepOne";
 import { StepTwo } from "../../components/FormSteps/StepTwo/StepTwo";
 import { StepThree } from "../../components/FormSteps/StepThree/StepThree";
-import { StepFour } from "../../components/FormSteps/StepFour/StepFour";
+import { StepFive } from "../../components/FormSteps/StepFive/StepFive";
 import { useState } from "react";
 
 export default function FormContent() {
@@ -38,7 +38,7 @@ export default function FormContent() {
                         {currentStep === 1 && <StepOne />}
                         {currentStep === 2 && <StepTwo />}
                         {currentStep === 3 && <StepThree />}
-                        {currentStep === 4 && <StepFour />}
+                        {currentStep === 4 && <StepFive />}
                         <button
                             className="styled-button"
                             onClick={async () => {

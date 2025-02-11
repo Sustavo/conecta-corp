@@ -1,12 +1,13 @@
 import { useFormContext } from "react-hook-form";
 import InputField from "../../InputField";
 import SelectField from "../../SelectField";
+import { StepThreeFormData } from "../../../lib/zod/wizard-form-datas";
 
 export function StepThree() {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<StepThreeFormData>();
 
   return (
     <div className="step-content">

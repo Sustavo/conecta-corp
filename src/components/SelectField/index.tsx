@@ -7,8 +7,8 @@ interface SelectFieldProps<T extends FieldValues> {
   label: string;
   children: React.ReactNode;
   error?: string;
+  isRequired?: boolean;
   register: UseFormRegister<T>;
-
 }
 
 export default function SelectField<T extends FieldValues>({
@@ -16,12 +16,13 @@ export default function SelectField<T extends FieldValues>({
   label,
   children,
   error,
+  isRequired = false,
   register
 }: SelectFieldProps<T>) {
   return (
     <div className="container-inputs">
       <label htmlFor={String(id)} className="labelText">
-        {label}
+        {label}{isRequired ? <span className="text-red-600" > *</span> : <span className="text-gray-400"> (opcional)</span>}
       </label>
       <select
         id={String(id)}
