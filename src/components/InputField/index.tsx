@@ -1,4 +1,4 @@
-import { FieldValues, Path, useFormContext } from "react-hook-form";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 import "./style.css";
 
 interface InputFieldProps<T extends FieldValues> {
@@ -6,7 +6,8 @@ interface InputFieldProps<T extends FieldValues> {
   label: string;
   type?: string;
   placeholder?: string;
-  validation?: object;
+  error?: string;
+  register: UseFormRegister<T>;
 }
 
 export default function InputField<T extends FieldValues>({
@@ -14,12 +15,9 @@ export default function InputField<T extends FieldValues>({
   label,
   type = "text",
   placeholder,
-  validation,
+  error,
+  register, // Receba o register como prop
 }: InputFieldProps<T>) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<T>();
 
   return (
     <div className="container-inputs">
@@ -31,9 +29,9 @@ export default function InputField<T extends FieldValues>({
         type={type}
         placeholder={placeholder}
         className="input"
-        {...register(id, validation)}
+        {...register(id)} // Repasse as propriedades do register
       />
-      {errors[id] && <p className="text-red-500 text-xs">{String(errors[id]?.message)}</p>}
+      {error?.trim() && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 }

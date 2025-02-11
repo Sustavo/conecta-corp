@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { StepFourFormData } from '../../../@types/StepTypes/StepFourFormData';
+import { StepFourFormData } from '../../../@types/StepsTypes/StepFormData';
 
 export function StepFour() {
   const { register, formState: { errors } } = useFormContext<StepFourFormData>();

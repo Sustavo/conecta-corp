@@ -8,21 +8,36 @@ export const addressSchema = z.object({
     zip: z.string().min(1, "CEP é obrigatório"),
 });
 
-export const formSchema = z.object({
+export const stepOneSchema = z.object({
     fullName: z.string().min(1, "Nome completo é obrigatório"),
     birthDate: z.string().min(1, "Data de nascimento é obrigatória"),
     email: z.string().email("E-mail inválido"),
     phone: z.string().min(10, "Telefone inválido"),
-    zipCode: z.string().min(1, "CEP é obrigatório"),
-    company: z.string().optional(),
+});
+
+export const stepTwoSchema = z.object({
+    residentialAddress: addressSchema,
+    isBillingSameAsResidential: z.boolean(),
+    billingAddress: addressSchema.optional(),
+});
+
+export const stepThreeSchema = z.object({
     occupation: z.string().optional(),
+    company: z.string().optional(),
     industry: z.string().optional(),
     salaryRange: z.string().optional(),
+});
+
+export const stepFourSchema = z.object({
     interests: z.object({
         products: z.array(z.string()),
         source: z.array(z.string()),
     }),
-    isBillingSameAsResidential: z.boolean(),
-    residentialAddress: addressSchema,
-    billingAddress: addressSchema,
+});
+
+export const formSchema = z.object({
+    ...stepOneSchema.shape,
+    ...stepTwoSchema.shape,
+    ...stepThreeSchema.shape,
+    ...stepFourSchema.shape,
 });

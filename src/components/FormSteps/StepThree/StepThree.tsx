@@ -1,31 +1,46 @@
+import { useFormContext } from "react-hook-form";
 import InputField from "../../InputField";
 import SelectField from "../../SelectField";
 
 export function StepThree() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
   return (
     <div className="step-content">
       <InputField
         id='occupation'
         label='Ocupação Atual'
         placeholder='Digite sua ocupação'
-        validation={{ required: "Ocupação é obrigatório" }}
+        register={register}
+        error={typeof errors.occupation?.message === "string" ? errors.occupation.message : undefined}
       />
 
       <InputField
         id='company'
         label='Empresa Onde Trabalha'
         placeholder="Digite o nome da empresa"
-        validation={{ required: "O nome da empresa é obrigatório" }}
+        register={register}
+        error={typeof errors.company?.message === "string" ? errors.company.message : undefined}
+
       />
 
       <InputField
         id='industry'
         label='Ramo de Atividade'
         placeholder="Digite o ramo de atividade"
-        validation={{ required: "Ramo de atividade é obrigatório" }}
+        register={register}
+        error={typeof errors.industry?.message === "string" ? errors.industry.message : undefined}
       />
 
-      <SelectField id="salaryRange" label="Salário Aproximado">
+      <SelectField
+        id="salaryRange"
+        label="Salário Aproximado"
+        error={typeof errors.salaryRange?.message === "string" ? errors.salaryRange.message : undefined}
+        register={register}
+      >
         <option value="">Selecione uma faixa salarial</option>
         <option value="0-2000">R$ 0 - R$ 2.000</option>
         <option value="2001-5000">R$ 2.001 - R$ 5.000</option>

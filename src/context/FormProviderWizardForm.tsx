@@ -1,46 +1,45 @@
-import { createContext, useContext } from "react";
-import { useForm, FormProvider, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider } from "react-hook-form";
 import { formSchema } from "../lib/zod/wizard-form-datas";
-import { z } from "zod";
 
-type FormDataSteps = z.infer<typeof formSchema>;
-
-const FormContext = createContext<{
-    methods: UseFormReturn<FormDataSteps>;
-  } | null>(null);
-
-export function FormProviderWrapper({ children }: { children: React.ReactNode }) {
-    const methods = useForm<FormDataSteps>({
-        resolver: zodResolver(formSchema),
+export function FormProviderWrapper({ children }: { children: React.ReactNode}) {
+    const methods = useForm({
+        resolver: zodResolver(formSchema,),
         defaultValues: {
             fullName: "",
             birthDate: "",
             email: "",
             phone: "",
-            zipCode: "",
-            company: "",
+            residentialAddress: {
+                country: "",
+                state: "",
+                city: "",
+                street: "",
+                zip: "",
+            },
+            isBillingSameAsResidential: false,
+            billingAddress: {
+                country: "",
+                state: "",
+                city: "",
+                street: "",
+                zip: "",
+            },
             occupation: "",
+            company: "",
             industry: "",
             salaryRange: "",
-            interests: { products: [], source: [] },
-            isBillingSameAsResidential: false,
-            residentialAddress: { country: "", state: "", city: "", street: "", zip: "" },
-            billingAddress: { country: "", state: "", city: "", street: "", zip: "" },
+            interests: {
+                products: [],
+                source: [],
+            },
         },
     });
 
     return (
-        <FormContext.Provider value={{ methods }}>
-            <FormProvider {...methods}>{children}</FormProvider>
-        </FormContext.Provider>
+        <FormProvider {...methods}>
+            {children}
+        </FormProvider>
     );
-}
-
-export function useFormContext() {
-    const context = useContext(FormContext);
-    if (!context) {
-        throw new Error("useFormContext deve ser usado dentro de um FormProviderWrapper");
-    }
-    return context;
 }

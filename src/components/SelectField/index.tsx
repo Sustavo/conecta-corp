@@ -1,25 +1,23 @@
 import React from "react";
-import { FieldValues, Path, useFormContext } from "react-hook-form";
+import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 import "./style.css";
 
 interface SelectFieldProps<T extends FieldValues> {
   id: Path<T>;
   label: string;
   children: React.ReactNode;
-  validation?: object;
+  error?: string;
+  register: UseFormRegister<T>;
+
 }
 
 export default function SelectField<T extends FieldValues>({
   id,
   label,
   children,
-  validation,
+  error,
+  register
 }: SelectFieldProps<T>) {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<T>();
-
   return (
     <div className="container-inputs">
       <label htmlFor={String(id)} className="labelText">
@@ -28,11 +26,11 @@ export default function SelectField<T extends FieldValues>({
       <select
         id={String(id)}
         className="input"
-        {...register(id, validation)}
+        {...register(id)} 
       >
         {children}
       </select>
-      {errors[id] && <p className="text-red-500 text-xs">{String(errors[id]?.message)}</p>}
+      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 }

@@ -1,7 +1,6 @@
-import { useFormContext } from "../../context/FormProviderWizardForm";
 import Stepper from "../../components/Stepper/Stepper";
-import { FORM_STEPS } from "./steps";
-import { FormProvider } from "react-hook-form";
+import { FORM_STEPS, VALIDATION_STEPS } from "./steps";
+import { FormProvider, useFormContext } from "react-hook-form";
 import { StepOne } from "../../components/FormSteps/StepOne/StepOne";
 import { StepTwo } from "../../components/FormSteps/StepTwo/StepTwo";
 import { StepThree } from "../../components/FormSteps/StepThree/StepThree";
@@ -9,7 +8,7 @@ import { StepFour } from "../../components/FormSteps/StepFour/StepFour";
 import { useState } from "react";
 
 export default function FormContent() {
-    const { methods } = useFormContext();
+    const methods = useFormContext();
     const [currentStep, setCurrentStep] = useState(1);
 
     const prevStep = () => {
@@ -18,8 +17,9 @@ export default function FormContent() {
 
     const onSubmit = (data: any) => {
         console.log("Form submitted with data:", data);
-        // Aqui você pode enviar os dados para uma API, por exemplo
     };
+
+    console.log(methods.getValues());
 
     return (
         <div className="flex justify-center gap-40 mt-32">
@@ -41,17 +41,11 @@ export default function FormContent() {
                         {currentStep === 4 && <StepFour />}
                         <button
                             className="styled-button"
-                            // onClick={
-                            //     currentStep === FORM_STEPS.length
-                            //         ? () => methods.handleSubmit(onSubmit)
-                            //         : () => {
-                            //             setCurrentStep((prev) => prev + 1)
-                            //             console.log(methods.getValues())
-                            //         }
-                            // }
-                            onClick={() => {
-                                setCurrentStep((prev) => prev + 1)
-                                console.log(methods.getValues())
+                            onClick={async () => {
+                                const isStepValid = await methods.trigger(VALIDATION_STEPS[currentStep - 1]);
+                                if (isStepValid) {
+                                    setCurrentStep((prev) => prev + 1);
+                                }
                             }}
                             type="button"
                         >
