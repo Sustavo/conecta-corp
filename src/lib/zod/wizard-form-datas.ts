@@ -17,18 +17,21 @@ export const stepOneSchema = z.object({
 
 export const stepTwoSchema = z.object({
     residentialAddress: addressSchema,
-    isBillingSameAsResidential: z.boolean(),
     billingAddress: addressSchema.optional(),
 });
 
 export const stepThreeSchema = z.object({
+    billingAddress: addressSchema
+});
+
+export const stepFourSchema = z.object({
     occupation: z.string().optional(),
     company: z.string().optional(),
     industry: z.string().optional(),
     salaryRange: z.string().optional(),
 });
 
-export const stepFourSchema = z.object({
+export const stepFiveSchema = z.object({
     interests: z.object({
         products: z.array(z.string()).min(1, "Pelo menos um produto deve ser selecionado"),
         source: z.array(z.string()).min(1, "Pelo menos uma fonte deve ser selecionada"), 
@@ -37,11 +40,12 @@ export const stepFourSchema = z.object({
 export const formSchema = z.object({
     ...stepOneSchema.shape,
     ...stepTwoSchema.shape,
-    ...stepThreeSchema.shape,
     ...stepFourSchema.shape,
+    ...stepFiveSchema.shape,
 });
 
 export type StepOneFormData = z.infer<typeof stepOneSchema>;
 export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
 export type StepFourFormData = z.infer<typeof stepFourSchema>;
+export type StepFiveFormData = z.infer<typeof stepFiveSchema>;

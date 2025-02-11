@@ -1,55 +1,59 @@
 import { useFormContext } from "react-hook-form";
-import InputField from "../../InputField";
-import SelectField from "../../SelectField";
 import { StepThreeFormData } from "../../../lib/zod/wizard-form-datas";
+import InputField from "../../InputField";
 
-export function StepThree() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<StepThreeFormData>();
+export default function StepThree() {
+    const {
+            register,
+            formState: { errors },
+        } = useFormContext<StepThreeFormData>();
 
-  return (
-    <div className="step-content">
-      <InputField
-        id='occupation'
-        label='Ocupação Atual'
-        placeholder='Digite sua ocupação'
-        register={register}
-        error={typeof errors.occupation?.message === "string" ? errors.occupation.message : undefined}
-      />
-
-      <InputField
-        id='company'
-        label='Empresa Onde Trabalha'
-        placeholder="Digite o nome da empresa"
-        register={register}
-        error={typeof errors.company?.message === "string" ? errors.company.message : undefined}
-
-      />
-
-      <InputField
-        id='industry'
-        label='Ramo de Atividade'
-        placeholder="Digite o ramo de atividade"
-        register={register}
-        error={typeof errors.industry?.message === "string" ? errors.industry.message : undefined}
-      />
-
-      <SelectField
-        id="salaryRange"
-        label="Salário Aproximado"
-        error={typeof errors.salaryRange?.message === "string" ? errors.salaryRange.message : undefined}
-        register={register}
-      >
-        <option value="">Selecione uma faixa salarial</option>
-        <option value="0-2000">R$ 0 - R$ 2.000</option>
-        <option value="2001-5000">R$ 2.001 - R$ 5.000</option>
-        <option value="5001-10000">R$ 5.001 - R$ 10.000</option>
-        <option value="10001-20000">R$ 10.001 - R$ 20.000</option>
-        <option value="20001+">Acima de R$ 20.001</option>
-      </SelectField>
-
-    </div>
-  );
+    return (
+            <div className="step-content">
+                <InputField
+                    id='billingAddress.country'
+                    label='País'
+                    placeholder='Digite o país'
+                    register={register}
+                    error={typeof errors.billingAddress?.country?.message === "string" ? errors.billingAddress?.country.message : undefined}
+                    isRequired={true}
+                />
+    
+                <InputField
+                    id='billingAddress.state'
+                    label='Estado'
+                    placeholder='Digite o estado'
+                    register={register}
+                    error={typeof errors.billingAddress?.state?.message === "string" ? errors.billingAddress.state.message : undefined}
+                    isRequired={true}
+                />
+    
+                <InputField
+                    id='billingAddress.city'
+                    label='Cidade'
+                    placeholder='Digite a cidade'
+                    register={register}
+                    error={typeof errors.billingAddress?.city?.message === "string" ? errors.billingAddress.city.message : undefined}
+                    isRequired={true}
+                />
+    
+                <InputField
+                    id='billingAddress.street'
+                    label='Rua'
+                    placeholder='Digite a rua'
+                    register={register}
+                    error={typeof errors.billingAddress?.street?.message === "string" ? errors.billingAddress.street.message : undefined}
+                    isRequired={true}
+                />
+    
+                <InputField
+                    id='billingAddress.zip'
+                    label='CEP'
+                    placeholder='Digite a CEP'
+                    register={register}
+                    error={typeof errors.billingAddress?.zip?.message === "string" ? errors.billingAddress.zip.message : undefined}
+                    isRequired={true}
+                />
+            </div>
+        );
 }

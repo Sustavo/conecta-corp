@@ -2,6 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import '../step.css'
 import InputField from '../../InputField';
 import { StepTwoFormData } from '../../../lib/zod/wizard-form-datas';
+import { useEffect, useState } from 'react';
 
 export function StepTwo() {
     const {
@@ -11,21 +12,21 @@ export function StepTwo() {
         formState: { errors },
     } = useFormContext<StepTwoFormData>();
 
-    const isBillingSameAsResidential = watch("isBillingSameAsResidential");
+    const [isSameAddress, setIsSameAddress] = useState(false);
 
-    const replicateAddress = () => {
-        if (isBillingSameAsResidential) {
-            setValue("billingAddress", watch("residentialAddress"));
+    const country = watch('residentialAddress.country');
+    const state = watch('residentialAddress.state');
+    const city = watch('residentialAddress.city');
+    const street = watch('residentialAddress.street');
+    const zip = watch('residentialAddress.zip');
+
+    useEffect(() => {
+        if (isSameAddress) {
+            setValue('billingAddress', { country, state, city, street, zip });
         } else {
-            setValue("billingAddress", {
-                country: "",
-                state: "",
-                city: "",
-                street: "",
-                zip: "",
-            });
+            setValue('billingAddress', undefined);
         }
-    };
+    }, [isSameAddress, country, state, city, street, zip, setValue]);
 
     return (
         <div className="step-content">
@@ -79,10 +80,10 @@ export function StepTwo() {
                     <input
                         type="checkbox"
                         className="mr-2"
-                        {...register("isBillingSameAsResidential")}
-                        onChange={replicateAddress}
+                        checked={isSameAddress}
+                        onChange={() => setIsSameAddress(!isSameAddress)}
                     />
-                    O endereço de cobrança é o mesmo que o residencial
+                    Endereço de cobrança é o mesmo que o residencial
                 </label>
             </div>
         </div>

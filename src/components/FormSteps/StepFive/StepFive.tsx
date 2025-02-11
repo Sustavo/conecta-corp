@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import CheckBoxForm from '../../CheckBoxForm';
 import { CHECKBOX_PRODUCTS_DATA, CHECKBOX_SOURCE_DATA } from './CheckBoxDatas';
-import { StepFourFormData } from '../../../lib/zod/wizard-form-datas';
+import { StepFiveFormData } from '../../../lib/zod/wizard-form-datas';
 
 export function StepFive() {
-  const { register, formState: { errors } } = useFormContext<StepFourFormData>();
+  const { register, formState: { errors } } = useFormContext<StepFiveFormData>();
 
   return (
     <div className="step-content w-[600px]">

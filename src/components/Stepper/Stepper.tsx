@@ -12,7 +12,7 @@ interface StepperProps {
 const Stepper = ({ steps, currentStep }: StepperProps) => {
   return (
     <>
-      <div className="flex flex-col justify-between gap-1">
+      <div className="flex flex-col justify-between gap-1 mb-32">
         {steps?.map(({ subTitle, title }, i) => (
           <div className="" key={i}>
             <div

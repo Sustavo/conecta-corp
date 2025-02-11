@@ -4,8 +4,12 @@ export const FORM_STEPS = [
     subTitle: "Preencha o formulário com suas informações pessoais.",
   },
   {
-    title: "Informações de Endereço",
-    subTitle: "Preencha o formulário com suas informações de endereço.",
+    title: "Informações de Endereço Residencial",
+    subTitle: "Preencha o formulário com suas informações de endereço residencial.",
+  },
+  {
+    title: "Informações de Endereço de Cobrança",
+    subTitle: "Preencha o formulário com suas informações de endereço de cobrança.",
   },
   {
     title: "Informações Profissionais",
@@ -26,6 +30,13 @@ export const VALIDATION_STEPS = [
     "residentialAddress.city",
     "residentialAddress.street",
     "residentialAddress.zip",
+  ],
+  [
+    "billingAddress.country",
+    "billingAddress.state",
+    "billingAddress.city",
+    "billingAddress.street",
+    "billingAddress.zip",
   ],
   [],
   ["interests.products", "interests.source"],

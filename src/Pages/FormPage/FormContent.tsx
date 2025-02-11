@@ -3,9 +3,10 @@ import { FORM_STEPS, VALIDATION_STEPS } from "./steps";
 import { FormProvider, useFormContext } from "react-hook-form";
 import { StepOne } from "../../components/FormSteps/StepOne/StepOne";
 import { StepTwo } from "../../components/FormSteps/StepTwo/StepTwo";
-import { StepThree } from "../../components/FormSteps/StepThree/StepThree";
 import { StepFive } from "../../components/FormSteps/StepFive/StepFive";
 import { useState } from "react";
+import { StepFour } from "../../components/FormSteps/StepFour/StepFour";
+import StepThree from "../../components/FormSteps/StepThree/StepThree";
 
 export default function FormContent() {
     const methods = useFormContext();
@@ -25,7 +26,7 @@ export default function FormContent() {
         <div className="flex justify-center gap-40 mt-32">
             <div className="flex flex-col">
                 <div
-                    className={`cursor-pointer w-min py-1 px-2 relative bottom-16 ${currentStep === 1 ? 'invisible' : ''}`}
+                    className={`cursor-pointer w-min py-1 px-2 relative bottom-8 ${currentStep === 1 ? 'invisible' : ''}`}
                     onClick={() => prevStep()}
                 >
                     <span className="text-[20px] text-[#605f6e] font-medium">Voltar</span>
@@ -38,7 +39,8 @@ export default function FormContent() {
                         {currentStep === 1 && <StepOne />}
                         {currentStep === 2 && <StepTwo />}
                         {currentStep === 3 && <StepThree />}
-                        {currentStep === 4 && <StepFive />}
+                        {currentStep === 4 && <StepFour />}
+                        {currentStep === 5 && <StepFive />}
                         <button
                             className="styled-button"
                             onClick={async () => {
