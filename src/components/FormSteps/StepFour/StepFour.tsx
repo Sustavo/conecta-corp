@@ -17,6 +17,7 @@ export function StepFour() {
         placeholder='Digite sua ocupação'
         register={register}
         error={typeof errors.occupation?.message === "string" ? errors.occupation.message : undefined}
+        isRequired={true}
       />
 
       <InputField
@@ -25,6 +26,7 @@ export function StepFour() {
         placeholder="Digite o nome da empresa"
         register={register}
         error={typeof errors.company?.message === "string" ? errors.company.message : undefined}
+        isRequired={true}
 
       />
 
@@ -34,12 +36,14 @@ export function StepFour() {
         placeholder="Digite o ramo de atividade"
         register={register}
         error={typeof errors.industry?.message === "string" ? errors.industry.message : undefined}
+        isRequired={true}
       />
 
       <SelectField
         id="salaryRange"
         label="Salário Aproximado"
         error={typeof errors.salaryRange?.message === "string" ? errors.salaryRange.message : undefined}
+        isRequired={true}
         register={register}
       >
         <option value="">Selecione uma faixa salarial</option>

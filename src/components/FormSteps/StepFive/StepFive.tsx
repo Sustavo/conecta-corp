@@ -12,7 +12,6 @@ export function StepFive() {
         label='Produtos ou serviços de interesse'
         checkBoxValues={CHECKBOX_PRODUCTS_DATA}
         register={register}
-        isRequired={true}
         error={typeof errors.interests?.products?.message === "string" ? errors.interests?.products?.message : undefined}
       />
 
@@ -20,7 +19,6 @@ export function StepFive() {
         label='Como conheceu a ConectaCorp?'
         checkBoxValues={CHECKBOX_SOURCE_DATA}
         register={register}
-        isRequired={true}
         error={typeof errors.interests?.source?.message === "string" ? errors.interests?.source?.message : undefined}
       />
     </div>

@@ -4,7 +4,7 @@ import CheckBoxField from "../CheckBoxField";
 interface CheckBoxFormProps<T extends FieldValues> {
     register: UseFormRegister<T>;
     error?: string;
-    isRequired: boolean;
+    isRequired?: boolean;
     label: string;
     checkBoxValues: {
         id: string;

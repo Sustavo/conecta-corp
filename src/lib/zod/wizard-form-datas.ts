@@ -17,7 +17,7 @@ export const stepOneSchema = z.object({
 
 export const stepTwoSchema = z.object({
     residentialAddress: addressSchema,
-    billingAddress: addressSchema.optional(),
+    billingAddress: addressSchema,
 });
 
 export const stepThreeSchema = z.object({
@@ -25,16 +25,16 @@ export const stepThreeSchema = z.object({
 });
 
 export const stepFourSchema = z.object({
-    occupation: z.string().optional(),
-    company: z.string().optional(),
-    industry: z.string().optional(),
-    salaryRange: z.string().optional(),
+    occupation: z.string().min(1, "Ocupação é obrigatória"),
+    company: z.string().min(1, "Empresa é obrigatória"),
+    industry: z.string().min(1, "Industria é obrigatória"),
+    salaryRange: z.string().min(1, "Renge Salarial é obrigatório"),
 });
 
 export const stepFiveSchema = z.object({
     interests: z.object({
-        products: z.array(z.string()).min(1, "Pelo menos um produto deve ser selecionado"),
-        source: z.array(z.string()).min(1, "Pelo menos uma fonte deve ser selecionada"), 
+        products: z.array(z.string()).optional(),
+        source: z.array(z.string()).optional(),
     }),
 });
 export const formSchema = z.object({
@@ -49,3 +49,4 @@ export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
 export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
 export type StepFourFormData = z.infer<typeof stepFourSchema>;
 export type StepFiveFormData = z.infer<typeof stepFiveSchema>;
+export type FormSchemaData = z.infer<typeof formSchema>;

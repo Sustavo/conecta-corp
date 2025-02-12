@@ -10,9 +10,6 @@ interface StepperProps {
 }
 
 export default function MobileStepper({ steps, currentStep }: StepperProps) {
-  console.log(steps.length);
-  console.log(currentStep);
-  //escreva uma funçaõ que soma 1 + 1 e retorna 2
 
   return (
     <>
