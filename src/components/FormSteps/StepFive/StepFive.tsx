@@ -3,7 +3,7 @@ import CheckBoxForm from '../../CheckBoxForm';
 import { CHECKBOX_PRODUCTS_DATA, CHECKBOX_SOURCE_DATA } from './CheckBoxDatas';
 import { StepFiveFormData } from '../../../lib/zod/wizard-form-datas';
 
-export function StepFive() {
+export default function StepFive() {
   const { register, formState: { errors } } = useFormContext<StepFiveFormData>();
 
   return (

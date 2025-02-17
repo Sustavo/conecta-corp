@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import InputField from "../../InputField";
 import { StepOneFormData } from "../../../lib/zod/wizard-form-datas";
 
-export function StepOne() {
+export default function StepOne() {
     const {
         register,
         formState: { errors },

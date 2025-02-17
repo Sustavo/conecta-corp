@@ -3,7 +3,7 @@ import InputField from "../../InputField";
 import SelectField from "../../SelectField";
 import { StepFourFormData } from "../../../lib/zod/wizard-form-datas";
 
-export function StepFour() {
+export default function StepFour() {
   const {
     register,
     formState: { errors },

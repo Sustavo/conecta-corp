@@ -3,7 +3,7 @@ import { StepTwoFormData } from '../../../lib/zod/wizard-form-datas';
 import { useEffect, useState } from 'react';
 import InputField from '../../InputField';
 
-export function StepTwo() {
+export default function StepTwo() {
     const {
         register,
         watch,

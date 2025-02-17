@@ -1,67 +1,26 @@
 import { FORM_STEPS, VALIDATION_STEPS } from "./steps";
 import { FormProvider, useFormContext } from "react-hook-form";
-import { StepOne } from "../../components/FormSteps/StepOne/StepOne";
-import { StepTwo } from "../../components/FormSteps/StepTwo/StepTwo";
-import { StepFive } from "../../components/FormSteps/StepFive/StepFive";
-import { useEffect, useState } from "react";
-import { StepFour } from "../../components/FormSteps/StepFour/StepFour";
-import StepThree from "../../components/FormSteps/StepThree/StepThree";
+import { useEffect, useRef, useState } from "react";
 import DesktopStepper from "../../components/Steppers/DesktopStepper/DesktopStepper";
 import MobileStepper from "../../components/Steppers/MobileStepper/MobileStepper";
-import axios from "axios";
 import { FormSchemaData } from "../../lib/zod/wizard-form-datas";
+import { modifyPdf } from "../../utils/ModifyPdf/modify-pdf";
+import SignaturePad from "react-signature-pad-wrapper";
 
 export default function FormContent() {
   const methods = useFormContext();
   const [currentStep, setCurrentStep] = useState(1);
   const [isExact1200, setIsExact1200] = useState(window.innerWidth > 1200);
-
+  const signaturePadRef = useRef<SignaturePad | null>(null);
+  
   const prevStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
   const sendDocument = async (data: FormSchemaData) => {
     try {
-      const formData = {
-        fullName: data.fullName,
-        birthDate: data.birthDate,
-        email: data.email,
-        phone: data.phone,
-        residentialAddress: `${data.residentialAddress.street}, ${data.residentialAddress.city} - ${data.residentialAddress.state}, ${data.residentialAddress.country}, ${data.residentialAddress.zip}`,
-        billingAddress: `${data.billingAddress?.street}, ${data.billingAddress?.city} - ${data.billingAddress?.state}, ${data.billingAddress?.country}, ${data.billingAddress?.zip}`,
-        occupation: data.occupation,
-        company: data.company.trim(),
-        industry: data.industry,
-        salaryRange: data.salaryRange
-      };
 
-      const requestBody = {
-        title: "Contrato de Prestação de Serviços",
-        externalId: `contrato_${data.birthDate.replace(/-/g, "_")}`,
-        recipients: [
-          {
-            name: data.fullName,
-            email: data.email,
-            role: "SIGNER",
-            signingOrder: 0
-          }
-        ],
-        meta: {},
-        authOptions: {
-          globalAccessAuth: "ACCOUNT",
-          globalActionAuth: "ACCOUNT"
-        },
-        formData
-      };
-
-      const response = await axios.post("https://app.documenso.com/api/v2-beta/template", requestBody, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer api_8habvnud7oamtjsn"
-        }
-      });
-
-      console.log("Documento enviado com sucesso:", response);
+      console.log("Documento enviado com sucesso:", data);
     } catch (error) {
       console.error("Erro ao enviar documento:", error);
     }
@@ -78,6 +37,10 @@ export default function FormContent() {
       }
     }
   };
+
+  useEffect(() => {
+    console.log(signaturePadRef)
+  },[signaturePadRef])
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,14 +72,22 @@ export default function FormContent() {
       <div className="w-[600px] px-4 max-sm:w-full pb-8">
         {methods && (
           <FormProvider {...methods}>
-            {currentStep === 1 && <StepOne />}
+            {/* {currentStep === 1 && <StepOne />}
             {currentStep === 2 && <StepTwo />}
             {currentStep === 3 && <StepThree />}
             {currentStep === 4 && <StepFour />}
-            {currentStep === 5 && <StepFive />}
+            {currentStep === 5 && <StepFive />} */}
+            <SignaturePad
+              ref={signaturePadRef}
+              width={400}
+              height={200}
+            />
             <button
               className="styled-button"
-              onClick={() => handleNextStep(methods.getValues() as FormSchemaData)}
+              // onClick={() => handleNextStep(methods.getValues() as FormSchemaData)}
+              // onClick={() => sendDocument(methods.getValues() as FormSchemaData)}
+              onClick={() => modifyPdf(methods.getValues() as FormSchemaData)}
+              // onClick={() => getPdfDimensions()}
               type="button"
             >
               {currentStep === FORM_STEPS.length ? "Finalizar" : "Próximo"}
